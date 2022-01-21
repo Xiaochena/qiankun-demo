@@ -1,0 +1,33 @@
+{
+  "name": "qiankun-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "examples:install": "npm-run-all --serial install:*",
+    "examples:start": "npm-run-all --parallel start:*",
+    "install:main": "cd vue-main && yarn",
+    "start:main": "cd vue-main && yarn serve",
+    "install:vue": "cd micro-app-vue && yarn",
+    "start:vue": "cd micro-app-vue && yarn serve",
+    "install:react": "cd micro-app-react && yarn",
+    "start:react": "cd micro-app-react && yarn start",
+    "install:static": "cd micro-app-static && yarn",
+    "start:static": "cd micro-app-static && yarn start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xiaochena/qiankun-demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Xiaochena/qiankun-demo/issues"
+  },
+  "homepage": "https://github.com/Xiaochena/qiankun-demo#readme",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
