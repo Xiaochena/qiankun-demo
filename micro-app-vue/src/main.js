@@ -1,40 +1,23 @@
+import Vue from "vue";
+import App from "./App.vue";
+
+import router from "./router";
+
 if (window.__POWERED_BY_QIANKUN__) {
   // 动态设置 webpack publicPath，防止资源加载出错
   // eslint-disable-next-line no-undef
   __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
 }
 
-import Vue from "vue";
-import App from "./App.vue";
-
-import VueRouter from "vue-router";
-import Home from "./views/Home.vue";
-import About from "./views/About.vue";
-
-// import router from "./router";
-
-Vue.use(VueRouter);
 Vue.config.productionTip = false;
 
 let instance = null;
-let router = null;
-
-const routes = [
-  { path: "/", name: "Home", component: Home },
-  { path: "/about", name: "About", component: About },
-];
 
 /**
  * 渲染函数
  * 两种情况：主应用生命周期钩子中运行 / 微应用单独启动时运行
  */
 function render() {
-  router = new VueRouter({
-    mode: "history",
-    base: window.__POWERED_BY_QIANKUN__ ? "/vue" : "/",
-    routes,
-  });
-
   instance = new Vue({
     router,
     render: (h) => h(App),
