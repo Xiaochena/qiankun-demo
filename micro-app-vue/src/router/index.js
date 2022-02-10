@@ -21,10 +21,14 @@ const routes = [
   },
 ];
 
-const router = new VueRouter({
-  mode: "history",
-  base: window.__POWERED_BY_QIANKUN__ ? "/vue" : "/",
-  routes,
-});
+function initRouter(opt) {
+  const router = new VueRouter({
+    mode: "history",
+    base: window.__POWERED_BY_QIANKUN__ ? "/vue" : "/",
+    routes,
+    ...opt,
+  });
+  return router;
+}
 
-export default router;
+export default initRouter;

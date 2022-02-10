@@ -7,18 +7,16 @@
       </div>
     </Card>
 
-    <Card dis-hover class="center">
+    <Card dis-hover>
+      <div id="main-vue" />
+    </Card>
+
+    <Card dis-hover class="center overflow-auto">
       <div id="main-react" />
     </Card>
 
     <Card dis-hover class="center">
       <div id="main-static" />
-    </Card>
-    <Card dis-hover>
-      <div style="text-align: center">
-        <img src="../assets/i-view-logo.png" />
-        <h3>A high quality UI Toolkit based on Vue.js</h3>
-      </div>
     </Card>
   </div>
 </template>
@@ -30,7 +28,7 @@ export default {
   name: "Main",
   components: {},
   data() {
-    return { microStatic: null, microReact: null };
+    return { microStatic: null, microReact: null, microVue: null };
   },
   mounted() {
     this.microStatic = loadMicroApp({
@@ -43,13 +41,20 @@ export default {
       entry: "//localhost:7070",
       container: "#main-react",
     });
+    this.microVue = loadMicroApp({
+      name: "VueMicroMain",
+      entry: "//localhost:9090",
+      container: "#main-vue",
+      props: { VueRouter: { base: "/main" } },
+    });
   },
 
   beforeRouteLeave(to, from, next) {
-    const { microReact, microStatic } = this;
+    const { microReact, microStatic, microVue } = this;
     const allSettledPromise = Promise.allSettled([
       microReact?.unmount(),
       microStatic?.unmount(),
+      microVue?.unmount(),
     ]);
     allSettledPromise.then(() => {
       next();
@@ -69,6 +74,9 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+  .overflow-auto {
+    overflow: auto;
   }
 }
 </style>

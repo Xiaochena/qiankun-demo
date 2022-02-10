@@ -10,7 +10,7 @@ const routes = [
     redirect: "/main",
   },
   {
-    path: "/main",
+    path: "/main*",
     name: "Main",
     component: Main,
   },

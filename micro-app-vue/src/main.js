@@ -1,7 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 
-import router from "./router";
+import initRouter from "./router";
 
 if (window.__POWERED_BY_QIANKUN__) {
   // 动态设置 webpack publicPath，防止资源加载出错
@@ -12,12 +12,19 @@ if (window.__POWERED_BY_QIANKUN__) {
 Vue.config.productionTip = false;
 
 let instance = null;
-
+let router = null;
 /**
  * 渲染函数
  * 两种情况：主应用生命周期钩子中运行 / 微应用单独启动时运行
  */
-function render() {
+function render(props) {
+  if (window.__POWERED_BY_QIANKUN__ && props?.VueRouter) {
+    router = initRouter(props?.VueRouter);
+  } else {
+    router = initRouter();
+  }
+
+  console.log(props, "props");
   instance = new Vue({
     router,
     render: (h) => h(App),
